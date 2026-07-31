@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ART Signup</title>
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: rgba(255,255,255,.06);
+      --panel-2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --border: rgba(255,255,255,.14);
+      --brand: #ef4444; /* red */
+      --brand-2: #f97316; /* orange */
+      --danger: #ef4444;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --focus: 0 0 0 4px rgba(124,58,237,.35);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(1100px 700px at 15% -10%, rgba(124,58,237,.35), transparent 55%),
+        radial-gradient(900px 600px at 90% 0%, rgba(34,197,94,.20), transparent 50%),
+        radial-gradient(800px 500px at 70% 110%, rgba(59,130,246,.18), transparent 55%),
+        var(--bg);
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header{
+      padding: 28px 16px 8px;
+    }
+
+    .container{
+      width: min(1100px, 100%);
+      margin: 0 auto;
+    }
+
+    .topbar{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    h1{
+      font-size: clamp(22px, 3.2vw, 30px);
+      margin: 0;
+      letter-spacing: .2px;
+    }
+
+    nav ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav a{
+      color: var(--text);
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    nav a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    main{
+      flex: 1;
+      padding: 16px;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    @media (min-width: 900px){
+      .grid{ grid-template-columns: 1.25fr .75fr; }
+    }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-inner{
+      padding: 18px;
+    }
+
+    @media (min-width: 600px){
+      .card-inner{ padding: 22px; }
+    }
+
+    h2{
+      margin: 0 0 8px;
+      font-size: clamp(18px, 2.4vw, 22px);
+    }
+
+    .note{
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 14px;
+    }
+
+    form{ display: grid; gap: 12px; }
+
+    .fields{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 700px){
+      .fields{ grid-template-columns: 1fr 1fr; }
+      .span-2{ grid-column: span 2; }
+    }
+
+    label{
+      display: block;
+      font-weight: 650;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    input, select{
+      width: 100%;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      padding: 12px 12px;
+      outline: none;
+      transition: box-shadow .15s ease, border-color .15s ease, background .15s ease;
+      font-size: 14.5px;
+    }
+
+    input::placeholder{ color: rgba(255,255,255,.45); }
+
+    input:focus, select:focus{
+      box-shadow: var(--focus);
+      border-color: rgba(124,58,237,.7);
+      background: rgba(0,0,0,.22);
+    }
+
+    .check{
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .check input{
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--brand);
+      flex: 0 0 auto;
+    }
+
+    .check label{
+      margin: 0;
+      font-size: 14px;
+      font-weight: 650;
+      color: rgba(255,255,255,.90);
+    }
+
+    button{
+      border: none;
+      width: 100%;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      color: white;
+      background: linear-gradient(135deg, var(--brand), #60a5fa);
+      box-shadow: 0 10px 30px rgba(124,58,237,.35);
+      transition: transform .15s ease, filter .15s ease;
+    }
+
+    button:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+    button:active{ transform: translateY(0); }
+    button:focus{ outline: none; box-shadow: var(--focus), 0 10px 30px rgba(124,58,237,.35); }
+
+    .side{
+      padding: 18px;
+    }
+
+    .side h2{ margin-bottom: 10px; }
+
+    .bullets{
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .bullets li{
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      margin-top: 6px;
+      flex: 0 0 auto;
+    }
+
+    .bullets strong{ display: block; font-size: 14px; }
+    .bullets span{ color: var(--muted); font-size: 13.5px; line-height: 1.35; }
+
+    footer{
+      padding: 18px 16px 28px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .footer-inner{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      nav a, button{ transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container topbar">
+      <h1>ART Signup</h1>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#signup">Sign up</a></li>
+          <li><a href="#help">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section id="signup" class="card" aria-labelledby="signup-title">
+        <div class="card-inner">
+          <h2 id="signup-title">Create your account</h2>
+          <p class="note" id="form-note">Fields marked * are required. This form is mobile-friendly and accessible.</p>
+
+          <form action="#" method="post">
+            <div class="fields">
+              <div>
+                <label for="fullName">Full name *</label>
+                <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+              </div>
+
+              <div>
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+              </div>
+
+              <div>
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" />
+              </div>
+
+              <div>
+                <label for="role">I am signing up as *</label>
+                <select id="role" name="role" required>
+                  <option value="" selected disabled>Select</option>
+                  <option value="artist">Artist</option>
+                  <option value="user">Member</option>
+                  <option value="admin">Organizer</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="password">Password *</label>
+                <input id="password" name="password" type="password" autocomplete="new-password" required minlength="8" />
+              </div>
+
+              <div>
+                <label for="confirmPassword">Confirm password *</label>
+                <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" required minlength="8" />
+              </div>
+
+              <div class="span-2">
+                <div class="check">
+                  <input id="terms" name="terms" type="checkbox" required />
+                  <label for="terms">I agree to the Terms and Privacy *</label>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit">Sign up</button>
+          </form>
+        </div>
+      </section>
+
+      <aside id="help" class="card" aria-labelledby="help-title">
+        <div class="side">
+          <h2 id="help-title">Need help?</h2>
+          <ul class="bullets">
+            <li>
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <strong>Fast setup</strong>
+                <span>Fill in required fields and submit. We keep the UI clean on mobile.</span>
+              </div>
+            </li>
+            <li>
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <strong>Password tips</strong>
+                <span>Use at least 8 characters. Use a unique password for best security.</span>
+              </div>
+            </li>
+            <li>
+              <span class="dot" aria-hidden="true"></span>
+              <div>
+                <strong>Support</strong>
+                <span>If you get stuck, contact support or try again later.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>&copy; <span>ART</span> <time datetime="2026">2026</time></p>
+      <p>Built for phone + desktop • Accessible inputs • Responsive layout</p>
+    </div>
+  </footer>
+</body>
+</html>
